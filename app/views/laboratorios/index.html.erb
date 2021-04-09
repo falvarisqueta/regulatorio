@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Laboratorios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @laboratorios.each do |laboratorio| %>
+      <tr>
+        <td><%= laboratorio.nombre %>
+        <td><%= link_to 'Show', laboratorio %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Laboratorio', new_laboratorio_path %>

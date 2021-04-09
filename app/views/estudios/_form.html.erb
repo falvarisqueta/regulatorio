@@ -1,0 +1,86 @@
+<%= form_with(model: estudio, local: true) do |form| %>
+  <% if estudio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estudio.errors.count, "error") %> prohibited this estudio from being saved:</h2>
+
+      <ul>
+        <% estudio.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="regulatorio_form">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <%= form.label :nombre %>
+          <%= form.text_field :nombre, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+          <%= form.label :estado %>
+          <%= form.select(:estado,
+              @estados.map {|e| [ e.first.titleize, e.first ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :especialidad %>
+          <%= form.select(:especialidad_id,
+              @especialidades.map {|e| [ e.nombre, e.id ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :laboratorio %>
+          <%= form.select(:laboratorio_id,
+              @laboratorios.map {|l| [ l.nombre, l.id ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :comentario %>
+          <%= form.text_area :comentario, rows:8,  class:'form-control' %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <%= form.label :fecha_ppi %>
+          <%= form.date_field :fecha_ppi, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_aprobacion_ppi %>
+          <%= form.date_field :fecha_aprobacion_ppi, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_envio_sponsor %>
+          <%= form.date_field :fecha_envio_sponsor, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_envio_ccis %>
+          <%= form.date_field :fecha_envio_ccis, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_aprobacion_ccis %>
+          <%= form.date_field :fecha_aprobacion_ccis, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_envio_anmat %>
+          <%= form.date_field :fecha_envio_anmat, class:'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= form.label :fecha_aprobacion_anmat %>
+          <%= form.date_field :fecha_aprobacion_anmat, class:'form-control' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="regulatorio_form">
+    <button type="submit" class="btn btn-secondary">Guardar</button>
+  </div>
+<% end %>

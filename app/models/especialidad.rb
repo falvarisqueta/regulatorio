@@ -1,0 +1,3 @@
+class Especialidad < ApplicationRecord
+
+end

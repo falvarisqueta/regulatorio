@@ -1,0 +1,52 @@
+<div class="regulatorio_form">
+
+
+    <table class="table">
+      <thead class="thead-light">
+        <%= form_with url:'/', method: :get, local: true do |form| %>
+        <tr>
+          <th>
+            Nombre
+            <%= form.text_field :nombre, class: 'form-control', value: @nombre%>
+          </th>
+          <th>Laboratorio
+          <%= form.select(:laboratorio_id,
+              @laboratorios.map {|l| [ l.nombre, l.id ] },
+              { include_blank: true, selected: @laboratorio },
+              { class:'form-control'})
+          %>
+          </th>
+          <th>
+            Especialidad
+            <%= form.select(:especialidad_id,
+                @especialidades.map {|e| [ e.nombre, e.id ] },
+                { include_blank: true, selected: @especialidad },
+                { class:'form-control' })
+            %>
+          </th>
+          <th>
+            Estado
+            <%= form.select(:estado,
+              @estados.map {|e| [ e.first.titleize, e.first ] },
+              { include_blank: true, selected: @estado },
+              { class:'form-control' })
+            %>
+          </th>
+          <th><button type="submit" class="btn btn-secondary">Filtrar</button></th>
+        </tr>
+      </thead>
+      <% end %>
+
+      <tbody>
+        <% @estudios.each do |estudio| %>
+          <tr>
+            <td><%= estudio.nombre %></td>
+            <td><%= estudio.laboratorio.nombre %></td>
+            <td><%= estudio.especialidad.nombre %></td>
+            <td><%= estudio.estado.titleize %></td>
+            <td><%= link_to 'Ver', estudio %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
