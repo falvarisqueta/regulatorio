@@ -5,6 +5,7 @@ class Estudio < ApplicationRecord
   belongs_to :laboratorio
 
   validates :nombre, :especialidad_id, :laboratorio_id, presence: true
+  validates :nombre, uniqueness: true
 
   scope :filter_by_nombre, -> (nombre) { where('nombre like ?', "#{nombre}%") }
   scope :filter_by_estado, -> (estado) { where(estado: estado) }
