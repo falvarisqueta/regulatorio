@@ -1,13 +1,16 @@
-<div class="regulatorio_form">
-
-
+<%= form_with method: :get, local: true do |form| %>
+  <div class="regulatorio_form">
     <table class="table">
       <thead class="thead-light">
-        <%= form_with method: :get, local: true do |form| %>
+
         <tr>
           <th>
             Nombre
             <%= form.text_field :nombre, class: 'form-control', value: @nombre%>
+          </th>
+          <th>
+            Codigo
+            <%= form.text_field :codigo, class: 'form-control', value: @codigo%>
           </th>
           <th>Laboratorio
           <%= form.select(:laboratorio_id,
@@ -15,6 +18,21 @@
               { include_blank: true, selected: @laboratorio },
               { class:'form-control'})
           %>
+          </th>
+          <th>Cro
+          <%= form.select(:cro_id,
+              @cros.map {|c| [ c.nombre, c.id ] },
+              { include_blank: true, selected: @cro },
+              { class:'form-control'})
+          %>
+          </th>
+          <th>
+            Area
+            <%= form.select(:area_id,
+                @areas.map {|a| [ a.nombre, a.id ] },
+                { include_blank: true, selected: @area },
+                { class:'form-control' })
+            %>
           </th>
           <th>
             Especialidad
@@ -25,6 +43,14 @@
             %>
           </th>
           <th>
+            Investigador
+            <%= form.select(:investigador_id,
+              @investigadores.map {|i| [ i.nombre, i.id ] },
+              { include_blank: true, selected: @investigador },
+              { class:'form-control' })
+            %>
+          </th>
+          <th>
             Estado
             <%= form.select(:estado,
               @estados.map {|e| [ e.first.titleize, e.first ] },
@@ -32,17 +58,24 @@
               { class:'form-control' })
             %>
           </th>
-          <th><button type="submit" class="btn btn-secondary">Filtrar</button></th>
+          <th>
+            <button type="submit" class="btn btn-secondary">Filtrar</button>
+            <%= link_to 'Limpiar', estudios_path, class: 'btn btn-secondary' %>
+          </th>
+
         </tr>
       </thead>
-      <% end %>
 
       <tbody>
         <% @estudios.each do |estudio| %>
           <tr>
             <td><%= estudio.nombre %></td>
+            <td><%= estudio.codigo %></td>
             <td><%= estudio.laboratorio.nombre %></td>
+            <td><%= estudio.cro ? estudio.cro.nombre : '' %></td>
+            <td><%= estudio.area ? estudio.area.nombre : '' %></td>
             <td><%= estudio.especialidad.nombre %></td>
+            <td><%= estudio.investigador ? estudio.investigador.nombre : '' %></td>
             <td><%= estudio.estado.titleize %></td>
             <td><%= link_to 'Ver', estudio %></td>
           </tr>
@@ -50,3 +83,4 @@
       </tbody>
     </table>
 </div>
+<% end %>

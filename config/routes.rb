@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :investigadors
+  resources :cros
+  resources :areas
   resources :laboratorios
   resources :estudios
   resources :especialidads

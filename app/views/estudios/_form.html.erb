@@ -1,8 +1,6 @@
 <%= form_with(model: estudio, local: true) do |form| %>
   <% if estudio.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(estudio.errors.count, "error") %> prohibited this estudio from being saved:</h2>
-
       <ul>
         <% estudio.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,8 +8,8 @@
       </ul>
     </div>
   <% end %>
-
   <div class="regulatorio_form">
+    <p id="notice"><%= notice %></p>
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -19,9 +17,21 @@
           <%= form.text_field :nombre, class: 'form-control'%>
         </div>
         <div class="form-group">
+          <%= form.label :codigo %>
+          <%= form.text_field :codigo, class: 'form-control'%>
+        </div>
+        <div class="form-group">
           <%= form.label :estado %>
           <%= form.select(:estado,
               @estados.map {|e| [ e.first.titleize, e.first ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :area %>
+          <%= form.select(:area_id,
+              @areas.map {|e| [ e.nombre, e.id ] },
               { include_blank: true },
               { class:'form-control' })
             %>
@@ -35,9 +45,37 @@
             %>
         </div>
         <div class="form-group">
+          <%= form.label :cro %>
+          <%= form.select(:cro_id,
+              @cros.map {|c| [ c.nombre, c.id ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
           <%= form.label :laboratorio %>
           <%= form.select(:laboratorio_id,
               @laboratorios.map {|l| [ l.nombre, l.id ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :commitment %>
+          <%= form.text_field :commitment, class: 'form-control'%>
+        </div>
+        <div class="form-group">
+          <%= form.label :contrato %>
+          <%= form.select(:contrato,
+              @estados_contrato.map {|e| [ e.first.titleize, e.first ] },
+              { include_blank: true },
+              { class:'form-control' })
+            %>
+        </div>
+        <div class="form-group">
+          <%= form.label :investigador %>
+          <%= form.select(:investigador_id,
+              @investigadores.map {|i| [ i.nombre, i.id ] },
               { include_blank: true },
               { class:'form-control' })
             %>
@@ -48,33 +86,79 @@
         </div>
       </div>
       <div class="col">
-        <div class="form-group">
-          <%= form.label :fecha_ppi %>
-          <%= form.date_field :fecha_ppi, class:'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= form.label :fecha_aprobacion_ppi %>
-          <%= form.date_field :fecha_aprobacion_ppi, class:'form-control' %>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_presentacion_paquete_inicial %>
+              <%= form.date_field :fecha_ppi, class:'form-control' %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_aprobacion_paquete_inicial %>
+              <%= form.date_field :fecha_aprobacion_ppi, class:'form-control' %>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <%= form.label :fecha_envio_sponsor %>
           <%= form.date_field :fecha_envio_sponsor, class:'form-control' %>
         </div>
-        <div class="form-group">
-          <%= form.label :fecha_envio_ccis %>
-          <%= form.date_field :fecha_envio_ccis, class:'form-control' %>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_presentacion_ccis_estudio %>
+              <%= form.date_field :fecha_envio_ccis, class:'form-control' %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_aprobacion_ccis_estudio %>
+              <%= form.date_field :fecha_aprobacion_ccis, class:'form-control' %>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <%= form.label :fecha_aprobacion_ccis %>
-          <%= form.date_field :fecha_aprobacion_ccis, class:'form-control' %>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_presentacion_ccis_centro %>
+              <%= form.date_field :fecha_envio_ccis_centro, class:'form-control' %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_aprobacion_ccis_centro %>
+              <%= form.date_field :fecha_aprobacion_ccis_centro, class:'form-control' %>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <%= form.label :fecha_envio_anmat %>
-          <%= form.date_field :fecha_envio_anmat, class:'form-control' %>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_presentacion_anmat_estudio %>
+              <%= form.date_field :fecha_envio_anmat, class:'form-control' %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_aprobacion_anmat_estudio %>
+              <%= form.date_field :fecha_aprobacion_anmat, class:'form-control' %>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <%= form.label :fecha_aprobacion_anmat %>
-          <%= form.date_field :fecha_aprobacion_anmat, class:'form-control' %>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_presentacion_anmat_centro %>
+              <%= form.date_field :fecha_envio_anmat_centro, class:'form-control' %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :fecha_aprobacion_anmat_centro %>
+              <%= form.date_field :fecha_aprobacion_anmat_centro, class:'form-control' %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

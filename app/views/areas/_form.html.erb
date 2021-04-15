@@ -1,17 +1,18 @@
-<%= form_with(model: laboratorio, local: true) do |form| %>
-  <% if laboratorio.errors.any? %>
+<%= form_with(model: area, local: true) do |form| %>
+  <% if area.errors.any? %>
     <div id="error_explanation">
       <ul>
-        <% laboratorio.errors.full_messages.each do |message| %>
+        <% area.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
   <div class="regulatorio_form">
     <p id="notice"><%= notice %></p>
     <div class="form-group">
-      <%= form.label :nombre_laboratorio %>
+      <%= form.label :nombre_area %>
       <%= form.text_field :nombre, class: 'form-control'%>
     </div>
   </div>

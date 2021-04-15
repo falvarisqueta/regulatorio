@@ -1,8 +1,6 @@
 <%= form_with(model: especialidad, local: true) do |form| %>
   <% if especialidad.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(especialidad.errors.count, "error") %> prohibited this especialidad from being saved:</h2>
-
       <ul>
         <% especialidad.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,6 +9,7 @@
     </div>
   <% end %>
   <div class="regulatorio_form">
+    <p id="notice"><%= notice %></p>
     <div class="form-group">
       <%= form.label :nombre_especialidad %>
       <%= form.text_field :nombre, class: 'form-control'%>
