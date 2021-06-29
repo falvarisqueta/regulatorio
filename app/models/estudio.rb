@@ -1,6 +1,7 @@
 class Estudio < ApplicationRecord
   include Filterable
 
+  mount_uploaders :archivos, RegulatorioUploader
   belongs_to :especialidad
   belongs_to :laboratorio
   belongs_to :area

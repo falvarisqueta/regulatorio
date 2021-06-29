@@ -109,6 +109,7 @@ class EstudiosController < ApplicationController
         :fecha_aprobacion_anmat,
         :fecha_envio_anmat_centro,
         :fecha_aprobacion_anmat_centro,
-        :comentario)
+        :comentario,
+        {archivos: []})
     end
 end

@@ -160,6 +160,20 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <%= form.label :archivos %> | <%= form.file_field :archivos, multiple: true %>
+              <ul>
+              <% estudio.archivos.each do |archivo| %>
+                <li>
+                <%= link_to archivo.identifier, archivo.url, target: "_blank"%>
+                </li>
+              <% end %>
+              <ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
