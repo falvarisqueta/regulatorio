@@ -25,6 +25,7 @@ class EstudiosController < ApplicationController
 
   # GET /estudios/1 or /estudios/1.json
   def show
+    @consultas = @estudio.consultas_pendientes
   end
 
   # GET /estudios/new

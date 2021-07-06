@@ -7,6 +7,7 @@ class Estudio < ApplicationRecord
   belongs_to :area
   belongs_to :investigador
   belongs_to :cro
+  has_many :consultum
 
   validates :nombre, :especialidad_id, :laboratorio_id, :area_id, :investigador_id, :cro_id, :codigo, presence: true
   validates :nombre, :codigo, uniqueness: true
@@ -23,4 +24,8 @@ class Estudio < ApplicationRecord
 
   enum estado: [:factibilidades, :seleccionado, :comite, :anmat_ccis, :on_going, :suspendido]
   enum contrato: [:en_negociacion, :firmado]
+
+  def consultas_pendientes
+    consultum.where(leido: false)
+  end
 end

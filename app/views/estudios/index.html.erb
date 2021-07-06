@@ -58,6 +58,7 @@
               { class:'form-control' })
             %>
           </th>
+          <th> Consultas Pendientes </th>
           <th colspan="2">
             <button type="submit" class="btn btn-secondary">Filtrar</button>
             <%= link_to 'Limpiar', estudios_path, class: 'btn btn-secondary' %>
@@ -77,6 +78,7 @@
             <td><%= estudio.especialidad.nombre %></td>
             <td><%= estudio.investigador ? estudio.investigador.nombre : '' %></td>
             <td><%= estudio.estado.titleize %></td>
+            <td><%= estudio.consultas_pendientes.count %></td>
             <td><%= link_to 'Ver', estudio %></td>
             <td><%= link_to 'Eliminar', estudio, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
           </tr>

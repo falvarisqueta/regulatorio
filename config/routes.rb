@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :consulta do
+    post :leer, on: :member
+  end
+  
   resources :investigadors
   resources :cros
   resources :areas

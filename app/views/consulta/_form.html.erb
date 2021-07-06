@@ -1,0 +1,28 @@
+<%= form_with(model: consultum, local: true) do |form| %>
+  <% if consultum.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% consultum.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :estudio_id %>
+  <div class="regulatorio_form">
+    <p id="notice"><%= notice %></p>
+    <div class="form-group">
+      <%= form.label :asunto %>
+      <%= form.text_field :asunto, class: 'form-control'%>
+    </div>
+    <div class="form-group">
+      <%= form.label :texto %>
+      <%= form.text_area :texto, rows:8,  class:'form-control' %>
+    </div>
+  </div>
+  <div class="regulatorio_form">
+    <button type="submit" class="btn btn-secondary">Guardar</button>
+    <%= link_to 'Volver', estudio_path(consultum.estudio), class: 'btn btn-secondary' %>
+  </div>
+<% end %>

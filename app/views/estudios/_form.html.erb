@@ -176,9 +176,33 @@
         </div>
       </div>
     </div>
+    <% unless estudio.new_record? || @consultas.empty? %>
+    <h4> Consultas Pendientes </h4>
+    <div>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>Asunto</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @consultas.each do |consulta| %>
+            <tr>
+              <td><%= link_to consulta.asunto, consultum_path(consulta) %></td>
+              <td><%= link_to 'Ver', consulta %></td>
+              <td><%= link_to 'Marcar Leido', leer_consultum_path(consulta), method: :post %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <% end %>
   </div>
 
   <div class="regulatorio_form">
     <button type="submit" class="btn btn-secondary">Guardar</button>
+    <%= link_to 'Consultar', new_consultum_path(estudio_id: estudio.id), class: 'btn btn-secondary' %>
+    <%= link_to 'Volver', estudios_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>
